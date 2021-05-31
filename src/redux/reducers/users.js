@@ -25,6 +25,14 @@ export default function users(state = initialState, action) {
         loading: false,
         error: action.message,
       }
+
+      /*case type.POST_USERS:
+      return {
+        ...state,
+        loading: true,
+           
+       
+      }*/
     default:
       return state
   }

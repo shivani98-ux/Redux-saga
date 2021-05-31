@@ -24,5 +24,38 @@ function* fetchUsers(action) {
 function* userSaga() {
    yield takeEvery('GET_USERS_REQUESTED', fetchUsers);
 }
+/*
+const postapiUrl = `https://jsonplaceholder.typicode.com/posts`;
+function postApi() {
+  return fetch(postapiUrl, {
+      method: 'POST',
+      headers: {
+         Accept : 'application/json',
+          'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify({
+         title: '',
+         body : '',
+      }),
+  });
+  function* fetchUsers(action) {
+   try {
+      const users = yield call(postApi);
+      yield put({type: 'POST_USERS', users: users});
+   } catch (e) {
+      yield put({type: 'POST_USERS', message: e.message});
+   }
+}
+
+function* userSaga() {
+   yield takeEvery('GET_USERS_REQUESTED', fetchUsers);
+}
+
+
+}
+*/
+
+
 
 export default userSaga;
