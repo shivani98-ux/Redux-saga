@@ -1,6 +1,10 @@
 .App {
-    margin: 5%;
+    margin: 10%;
   }
   .card {
-    margin: 10px;
+    margin: 50px;
+  }
+
+  .card-title {
+   text-decoration:blue
   }

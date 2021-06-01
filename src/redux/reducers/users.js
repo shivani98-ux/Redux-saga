@@ -26,13 +26,23 @@ export default function users(state = initialState, action) {
         error: action.message,
       }
 
-      /*case type.POST_USERS:
-      return {
-        ...state,
-        loading: true,
-           
-       
-      }*/
+      case type.GET_USERBYID_REQUESTED:
+        return {
+          ...state,
+          loading: true,
+        }
+    case type.GET_USERBYID_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          users: action.users
+        }
+    case type.GET_USERBYID_FAILED:
+        return {
+          ...state,
+          loading: false,
+          error: action.message,
+        }
     default:
       return state
   }
