@@ -43,6 +43,41 @@ export default function users(state = initialState, action) {
           loading: false,
           error: action.message,
         }
+     case type.ADD_USERS_REQUESTED:
+          return {
+            ...state,
+            loading: true,
+          }
+    case type.ADD_USERS_SUCCESS:
+          return {
+            ...state,
+            loading: false,
+            users: action.users
+          }
+    case type.ADD_USERS_FAILED:
+          return {
+            ...state,
+            loading: false,
+            error: action.message,
+          }
+          case type.SORT_USERS_REQUESTED:
+            return {
+              ...state,
+              loading: true,
+            }
+      case type.SORT_USERS_SUCCESS:
+            return {
+              ...state,
+              loading: false,
+              users: action.users
+            }
+      case type.SORT_USERS_FAILED:
+            return {
+              ...state,
+              loading: false,
+              error: action.message,
+            }
+      
     default:
       return state
   }

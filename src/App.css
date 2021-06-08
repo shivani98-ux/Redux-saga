@@ -2,9 +2,18 @@
     margin: 10%;
   }
   .card {
-    margin: 50px;
+    margin: 20px;
   }
 
   .card-title {
-   text-decoration:blue
+   color:darkblue
   }
+  .card-body{
+    background-color: burlywood;
+  }
+  .home{
+    background-color: darkcyan;
+  }
+  
+
+  

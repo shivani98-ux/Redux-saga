@@ -9,12 +9,18 @@ const  SearchById = () => {
     dispatch = useDispatch();
         
     return(
-            <div className="userById">
+            
                 <form onSubmit={handleSubmit}>
+                    <div className="container">
+                    <div className="search-box">
                     <input type="text" name ="id" id="id" placeholder="Enter id" className="input mb-5 mr-2"></input>
+                    </div>
+                    <div>
                     <button type="submit">Search By Id</button> 
-                </form>
+                    </div>
+                
             </div>
+            </form>
         );
 }
 
