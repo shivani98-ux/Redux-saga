@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { sortUsers } from '../redux/actions/sortuser';
 import Card from './CardComponent';
 
-const Sort = () => {
+const SortbyTitle = () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.users.users);
   const loading = useSelector(state => state.users.loading);
@@ -13,17 +13,13 @@ const Sort = () => {
     dispatch(sortUsers());
   }, [])
  
-  
+
   const[sort, setSort] = useState('asc');
   users.sort( (a, b) =>{
 
     const isReversed = (sort=== 'asc') ? 1: -1;
-    return isReversed * a.userId.localeCompare(b.userId);
+    return isReversed * a.title.localeCompare(b.title);
   })
-
- 
- 
-  
   return (
     <>
     <button className="button" onClick={()=>setSort('asc')}>Sort By Asc</button>
@@ -38,4 +34,4 @@ const Sort = () => {
     </>
   )
 }
-export default Sort;
+export default SortbyTitle;

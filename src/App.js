@@ -6,6 +6,8 @@ import './App.css';
 import HomeComponent from './components/HomeComponent'
 import SearchById from './components/SearchById';
 import Sort from './components/SortbyId'
+import SortbyBody from './components/SortbyBody'
+import SortbyTitle from './components/SortbyTitle'
 const UsersComponent = lazy(() => import("./components/UsersComponent"));
 
 function App() {
@@ -23,8 +25,12 @@ function App() {
 <li class="nav-item">
   <a class="nav-link" href="/SearchById">Find User</a>
 </li>
+
 <li class="nav-item">
-  <a class="nav-link" href="/Sort">Sort User</a>
+  <a class="nav-link" href="/SortbyBody">Sort By Body</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="/SortbyTitle">Sort By Title</a>
 </li>
 
 
@@ -41,7 +47,9 @@ function App() {
           </Suspense>
         </Route>
         <Route path='/SearchById' component={SearchById} exact></Route>
-        <Route path='/Sort' component={Sort} exact></Route>
+       
+        <Route path='/SortbyBody' component={SortbyBody} exact></Route>
+        <Route path='/SortbyTitle' component={SortbyTitle} exact></Route>
       </Switch>
     </div>
   </Router>
