@@ -15,7 +15,7 @@ function App() {
     <Router>
     <div>
       <nav >
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs navbar navbar-expand-lg navbar-light bg-light">
 <li class="nav-item">
   <a class="nav-link active" aria-current="page" href="/">Home</a>
 </li>
@@ -32,7 +32,9 @@ function App() {
 <li class="nav-item">
   <a class="nav-link" href="/SortbyTitle">Sort By Title</a>
 </li>
-
+<li class="nav-item">
+  <a class="nav-link " href="/Sort">Sort By ID</a>
+</li>
 
 </ul>
       </nav>
@@ -46,10 +48,24 @@ function App() {
           <UsersComponent></UsersComponent>
           </Suspense>
         </Route>
-        <Route path='/SearchById' component={SearchById} exact></Route>
+        <Route path='/SearchById'>
+          <SearchById></SearchById>
+        </Route>
        
-        <Route path='/SortbyBody' component={SortbyBody} exact></Route>
-        <Route path='/SortbyTitle' component={SortbyTitle} exact></Route>
+        <Route path='/SortbyBody'>
+          <SortbyBody></SortbyBody>
+         
+        </Route>
+        <Route path='/SortbyTitle' >
+          <SortbyTitle></SortbyTitle>
+        </Route>
+        <Route path="/Sort">
+            <Sort></Sort>
+          </Route>
+
+          <Route path='/' >
+        <HomeComponent></HomeComponent>
+      </Route>
       </Switch>
     </div>
   </Router>

@@ -17,8 +17,8 @@ const Sort = () => {
   const[sort, setSort] = useState('asc');
   users.sort( (a, b) =>{
 
-    const isReversed = (sort=== 'asc') ? 1: -1;
-    return isReversed * a.userId.localeCompare(b.userId);
+    const isReversed = (sort=== 'asc') ? a.id- b.id : b.id - a.id;
+    return isReversed 
   })
 
  
@@ -26,8 +26,12 @@ const Sort = () => {
   
   return (
     <>
-    <button className="button" onClick={()=>setSort('asc')}>Sort By Asc</button>
-    <button className="button" onClick={()=>setSort('desc')} >Sort By DESC</button>
+    <div className="SortbyBody px-5 mt-5 ">
+    <div class="d-grid gap-2 col-6 mx-auto">
+    <button className="button" class="btn btn-outline-secondary" onClick={()=>setSort('asc')}>Ascending</button>
+    <button className="button" class="btn btn-outline-secondary" onClick={()=>setSort('desc')} >Descending</button>
+    </div>
+   </div>
 
       {users.loading && <p>Loading...</p>}
       {users.length === 0 && !loading && <p>No users available!</p>}

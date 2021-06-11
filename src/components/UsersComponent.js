@@ -15,12 +15,15 @@ const Users = () => {
 
   return (
     <>
+    
       {users.loading && <p>Loading...</p>}
+      <button>delete</button>
       {users.length === 0 && !loading && <p>No users available!</p>}
       {error && !loading && <p>{error}</p>}
       {users.length > 0 && users.map((user) => (
-        <Card key={user.id} user={user} />
+        <Card key={user.id} user={user}/>
       ))}
+      
     </>
   )
 }

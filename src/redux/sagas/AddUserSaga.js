@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-const apiUrl = `https://jsonplaceholder.typicode.com/posts`;
+const apiUrl = `'https://jsonplaceholder.typicode.com/posts',this.state`;
 function getApi() {
   return fetch(apiUrl, {
       method: 'POST',
@@ -8,8 +8,13 @@ function getApi() {
           'Content-Type': 'application/json',
 
       }
-  }).then(response => response.json())
-    .catch((error) => {throw error})
+  })  .then(response => {
+   console.log(response)
+})
+
+.catch(error => {
+   console.log(error)
+})
 }
 
 function* fetchUsers(action) {

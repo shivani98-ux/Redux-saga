@@ -5,15 +5,13 @@
     margin: 20px;
   }
 
-  .card-title {
-   color:darkblue
-  }
-  .card-body{
-    background-color: burlywood;
-  }
-  .home{
-    background-color: darkcyan;
-  }
   
+  
+ .SortbyBody{
+   margin:20px
+ }
+ body {
+  background-color:lightcyan;
+}
 
-  
+ 
