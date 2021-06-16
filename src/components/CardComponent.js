@@ -1,37 +1,21 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteUsers } from '../redux/actions/delete';
-const Card = (props) => {
+import { useState, useCallback } from "react";
 
-  let dispatch;
+import { deleteUsers } from '../redux/actions/delete';
+
+let dispatch;
+const Card = (props) => {
   
   dispatch = useDispatch();
-  const users = useSelector(state => state.users.users);
+  let users = useSelector(state => state.users.users);
  
   console.log("Users List: ", users);
   const id = users.id;
-  const userId = users.userId;
-  const title = users.title;
-  const body = users.body;
+  
 
-
-  const removeData = (id) => {
-    if (window.confirm("Are you sure?")) {
-
-        fetch('https://jsonplaceholder.typicode.com/posts/' + id,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'content-Type': 'application/json'
-                }
-            })
-
-            .then(console.log("Deleted"))
-            .catch(err => console.log(err));
-    }
-};
+  
   return (
     
     <div>
@@ -39,17 +23,29 @@ const Card = (props) => {
      <div className="card-body">
     
        <h5 className="card-id">Id: {props.user.id}</h5>
+      
        <h5 className="card-title mb-2 text-muted">Title :{props.user.title}</h5>
        <h6 className="card-user mb-2 text-muted"> Body: {props.user.body}</h6>
        <div className="col-5">
               </div> 
+              <button className="btn btn-danger shadow-none" onClick={(e) => deleteUserById(e, id)}><span className="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User">Delete</span></button>
              </div>
        </div> 
       
-       <button className="btn-xs btn-danger shadow-none deletebutton" onClick={() => removeData(id)}>Delete</button>
+       <div >
+      
+
+      </div>
+       
        </div>
+       
  )
 }
 export default Card;
 
- 
+function deleteUserById(event, id) {
+  event.preventDefault();
+  console.log("id", id);
+  dispatch(deleteUsers(id));
+  alert("User deleted successfully");
+}

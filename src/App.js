@@ -12,6 +12,7 @@ const UsersComponent = lazy(() => import("./components/UsersComponent"));
 
 function App() {
   return (
+    
     <Router>
     <div>
       <nav >
@@ -69,9 +70,10 @@ function App() {
       </Switch>
     </div>
   </Router>
-    /*
+   
+  /*
     <div className="App">
-     <Sort></Sort>
+     <AddComponent />
        
     </div>*/
   );
