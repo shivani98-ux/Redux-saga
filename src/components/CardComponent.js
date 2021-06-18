@@ -1,18 +1,43 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useCallback } from "react";
-
+import { useState, useEffect, useCallback } from "react";
+import { getUsers } from '../redux/actions/users';
 import { deleteUsers } from '../redux/actions/delete';
 
 let dispatch;
+const usersPerPage = 3;
+let arrayForHoldingUsers = [];
 const Card = (props) => {
+  const [usersToShow, setUsersToShow] = useState([]);
+  const [next, setNext] = useState(3);
+
+  const loopWithSlice = (start, end) => {
+    const slicedUsers = users.slice(start, end);
+    arrayForHoldingUsers = [...arrayForHoldingUsers, ...slicedUsers];
+    setUsersToShow(arrayForHoldingUsers);
+  };
+
+  useEffect(() => {
+    loopWithSlice(0, usersPerPage);
+  }, []);
+
+  const handleShowMoreUsers = () => {
+    loopWithSlice(next, next + usersPerPage);
+    setNext(next + usersPerPage);
+  };
+
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users.users);
+  const loading = useSelector(state => state.users.loading);
+  const error = useSelector(state => state.users.error);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [])
+
   
-  dispatch = useDispatch();
-  let users = useSelector(state => state.users.users);
- 
-  console.log("Users List: ", users);
-  const id = users.id;
+  
   
 
   
@@ -27,12 +52,13 @@ const Card = (props) => {
        <h5 className="card-title mb-2 text-muted">Title :{props.user.title}</h5>
        <h6 className="card-user mb-2 text-muted"> Body: {props.user.body}</h6>
        <div className="col-5">
+      
               </div> 
-              <button className="btn btn-danger shadow-none" onClick={(e) => deleteUserById(e, id)}><span className="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User">Delete</span></button>
+              
              </div>
        </div> 
       
-       <div >
+       <div > 
       
 
       </div>
@@ -43,9 +69,3 @@ const Card = (props) => {
 }
 export default Card;
 
-function deleteUserById(event, id) {
-  event.preventDefault();
-  console.log("id", id);
-  dispatch(deleteUsers(id));
-  alert("User deleted successfully");
-}

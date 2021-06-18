@@ -1,54 +1,93 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { connect } from 'react-redux';
-import {addUsers} from '../redux/actions/add';
-class AddComponent extends Component {
-   state={
-       id:'',
-       userId:'',
-       title:'',
-       body:''
-   }
-    handleTextChange = event => {
-        const {target: {name, value}} = event;
-        this.setState({[name]: value });
-    }
+import React, { Component , useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { addUsers } from '../redux/actions/add';
+import axios from 'axios';
 
-   handleOnSubmit = event => {
-       event.preventDefault();
-       this.props.addUsers(this.state);
-       this.setState({
-           id: '',
-           userId:'',
-            title:'',
-            body:''
+let dispatch;
+let users;
 
-       });
-   }
-   render(){
-       return(
-           <div className="card-body">
-               <div className="form-container">
-                   <form onSubmit={this.handleOnSubmit}>
-                       <div className="form-group">
-                           <label>ID:</label>{'\u00A0'}<input onChange={this.handleTextChange} value={this.state.id} name="id" types="text" className="form-control" placeholder="ID" required/>
-                       </div>
-                       <div className="form-group">
-                           <label>User_ID:</label>{'\u00A0'}<input onChange={this.handleTextChange} value={this.state.userId} name="userId" types="text" className="form-control" placeholder="User_Id" required/>
-                       </div>
-                       <div className="form-group">
-                           <label>Title:</label>{'\u00A0'}<input onChange={this.handleTextChange} value={this.state.title} name="title" types="text" className="form-control" placeholder="Title" required/>
-                       </div>
-                       <div className="form-group">
-                           <label>Body:</label>{'\u00A0'}<input onChange={this.handleTextChange} value={this.state.body} name="body" types="text" className="form-control" placeholder="Body" required/>
-                       </div>
-                       <div className="form-group">
-                           <button className="btn btn-success" type="submit">Add User</button>
-                       </div>
-                   </form>
-               </div>
-           </div>
-       )
-   }}
-   export default connect(null, {addUsers})(AddComponent);
-  
+const AddComponent = () => {
+
+
+	const [data, setData] = useState({
+		userId: '',
+		title: '',
+		body: ''
+	})
+	dispatch = useDispatch();
+	users = useSelector(state => state.users.users);
+    console.log("UserList:", users);
+
+	function handleSubmit  (e) {
+		e.preventDefault()
+		//console.log("users::  ", new users("1", "title", "body"));
+		//dispatch(addUser(data));
+
+		axios.post(`https://jsonplaceholder.typicode.com/posts`,{
+			userId: data.userId,
+			title: data.title,
+			body: data.body
+		})
+		.then(res=>{
+			console.log(res.data)
+		})		
+	}
+	function handle(e){
+
+		const newdata = {...data}
+		newdata[e.target.id]= e.target.value
+		setData(newdata)
+		console.log(newdata)
+	}
+
+	return (
+		<center>
+		<div>
+			<div className="AddComponent px-5 mt-5 "></div>
+            <h4>Add User</h4>
+			<br></br>
+			<br></br>
+			<form onSubmit={(e)=>handleSubmit(e)}>
+				<div>
+				<label>ID:</label>
+					<input
+						type="text"
+						value={data.userId}
+						id="userId"
+						onChange={(e)=>handle(e)}
+					/>
+				</div>
+				<br></br>
+				<br></br>
+				<div>
+				<label>Title:</label>
+					<input
+						type="text"
+						value={data.title}
+						id="title"
+						onChange={(e)=>handle(e)}
+					/>
+				</div>
+				<br></br>
+				<br></br>
+				<div>
+				<label>Body : </label>
+					<input
+						type="text"
+						value={data.body}
+						id="body"
+						onChange={(e)=>handle(e)}
+
+					/>
+				</div>
+				<br></br>
+				<br></br>
+				<button type="submit" className="button mb-5">Submit</button>
+			</form>
+		</div>
+		</center>
+	)
+
+}
+
+export default AddComponent

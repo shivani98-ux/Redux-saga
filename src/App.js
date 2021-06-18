@@ -1,3 +1,17 @@
+/*import React, { useState, useEffect } from 'react';
+import AddComponent from './components/AddComponent';
+
+import axios from 'axios';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <AddComponent></AddComponent>
+    </div>
+  )
+}
+export default App;*/
 import React, { Component, lazy, Suspense } from 'react';
 //import UsersComponent from './components/UsersComponent';
 import Home from './components/HomeComponent';
@@ -8,6 +22,8 @@ import SearchById from './components/SearchById';
 import Sort from './components/SortbyId'
 import SortbyBody from './components/SortbyBody'
 import SortbyTitle from './components/SortbyTitle'
+import AddComponent from './components/AddComponent';
+import DeleteComponent from './components/DeleteComponent'
 const UsersComponent = lazy(() => import("./components/UsersComponent"));
 
 function App() {
@@ -37,6 +53,13 @@ function App() {
   <a class="nav-link " href="/Sort">Sort By ID</a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link " href="/AddComponent">AddComponent</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link " href="/DeleteUser">DeleteUser</a>
+</li>
+
 </ul>
       </nav>
 
@@ -63,6 +86,14 @@ function App() {
         <Route path="/Sort">
             <Sort></Sort>
           </Route>
+
+          <Route path='/AddComponent' >
+        <AddComponent></AddComponent>
+      </Route>
+
+      <Route path='/DeleteUser' >
+        <DeleteComponent></DeleteComponent>
+      </Route>
 
           <Route path='/' >
         <HomeComponent></HomeComponent>
