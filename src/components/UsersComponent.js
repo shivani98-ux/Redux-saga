@@ -7,6 +7,10 @@ import Card from './CardComponent';
 
 const Users = () => {
 
+  const[user, setUser] = useState([]);
+  const [visible, setVisible] = useState(3);
+  
+
   const dispatch = useDispatch();
   const users = useSelector(state => state.users.users);
   const loading = useSelector(state => state.users.loading);
@@ -21,15 +25,12 @@ const Users = () => {
 
   return (
     <>
-    
+   
       {users.loading && <p>Loading...</p>}
-      
       {users.length === 0 && !loading && <p>No users available!</p>}
       {error && !loading && <p>{error}</p>}
-     
       {users.length > 0 && users.map((user) => (
-        <Card key={user.id} user={user}/>
-        
+        <Card key ={user.id} user={user.slice(0,3)}/> 
       ))}
      
       

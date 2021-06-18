@@ -2,12 +2,33 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from '../redux/actions/users';
 import { deleteUsers } from '../redux/actions/delete';
-
+import ReactPaginate from 'react-paginate';
+import Paginations from "./Pagination";
 let dispatch;
 let currentData;
 const DeleteUser = () => {
+
   dispatch = useDispatch();
   let users = useSelector(state => state.users.users);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  let NUM_OF_RECORDS = users.length;
+  let LIMIT = 5;
+
+  const onPageChanged = useCallback(
+    (event, page) => {
+      event.preventDefault();
+      setCurrentPage(page);
+    },
+    [setCurrentPage]
+  );
+  currentData = users.slice(
+    (currentPage - 1) * LIMIT,
+    (currentPage - 1) * LIMIT + LIMIT
+  );
+
+ 
+  
 
   React.useEffect(() => {
     Users()
@@ -24,7 +45,7 @@ const DeleteUser = () => {
     users = [];
     console.log("Set users to blank array");
   }
- 
+  
   return (
     <div className="User px-5">
       <table border="2" class="table table-striped">
@@ -38,18 +59,27 @@ const DeleteUser = () => {
           </tr>
         </thead>
         <tbody>
-          {renderTableData(users)}
+          {renderTableData(currentData)}
         </tbody>
       </table>
-     
+      <div className="pagination-wrapper">
+          <Paginations
+            totalRecords={NUM_OF_RECORDS}
+            pageLimit={LIMIT}
+            pageNeighbours={2}
+            onPageChanged={onPageChanged}
+            currentPage={currentPage}
+          />
+          </div>
+   
     </div>
 
   )
 }
 
-function renderTableData(users) {
-  console.log("userList: ", users);
-  return users.map((user, index) => {
+function renderTableData(currentData) {
+  console.log("userList: ", currentData);
+  return currentData.map((user, index) => {
     const { id, userId, title, body } = user
     return (
       <tr key={id}>
